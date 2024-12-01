@@ -1,5 +1,6 @@
-import {useState} from "react";
-import {categories} from "../data/categories.ts";
+import {ChangeEvent} from "react"
+import {useState} from "react"
+import {categories} from "../data/categories.ts"
 
 export function Form() {
     const [activity, setActivity] = useState({
@@ -8,12 +9,11 @@ export function Form() {
         calories: 0
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         setActivity({
             ...activity,
             [e.target.id]: e.target.value
         })
-        console.log(e.target.id)
     }
 
     return (
@@ -46,7 +46,7 @@ export function Form() {
                     className="border border-slate-300 p-2 rounded-lg w-full bg-white"
                     placeholder="Ej. Comida, Juego de Naranja, Ensalada, Ejercicio, Pesas."
                     value={activity.name}
-                    onChange={ handleChange}
+                    onChange={handleChange}
                 />
             </div>
 
