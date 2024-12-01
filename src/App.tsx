@@ -1,6 +1,5 @@
 import {Form} from "./components/Form.tsx";
 
-Form
 function App() {
     return (
         <>
