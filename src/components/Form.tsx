@@ -1,4 +1,4 @@
-import {useState, ChangeEvent} from "react"
+import {useState, ChangeEvent, FormEvent} from "react"
 import {categories} from "../data/categories.ts"
 
 import {Activity} from "../types";
@@ -12,7 +12,6 @@ export function Form() {
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id)
-        console.log(isNumberField)
         setActivity({
             ...activity,
             [e.target.id]: isNumberField ? +e.target.value : e.target.value
@@ -21,11 +20,18 @@ export function Form() {
 
     const isValidActivity = () => {
         const {name, calories} = activity
-        console.log(name.trim() !== '' && calories > 0)
         return name.trim() !== '' && calories > 0
     }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(e)
+    }
     return (
-        <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+        <form
+            className="space-y-5 bg-white shadow p-10 rounded-lg"
+            onSubmit={handleSubmit}
+        >
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="category" className="font-bold">Categoría:</label>
                 <select
