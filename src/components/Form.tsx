@@ -1,24 +1,26 @@
-import {ChangeEvent} from "react"
-import {useState} from "react"
+import {useState, ChangeEvent} from "react"
 import {categories} from "../data/categories.ts"
 
+import {Activity} from "../types";
+
 export function Form() {
-    const [activity, setActivity] = useState({
+    const [activity, setActivity] = useState<Activity>({
         category: 1,
         name: '',
         calories: 0
     })
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
+        const isNumberField = ['category', 'calories'].includes(e.target.id)
+        console.log(isNumberField)
         setActivity({
             ...activity,
-            [e.target.id]: e.target.value
+            [e.target.id]: isNumberField ? +e.target.value : e.target.value
         })
     }
 
     return (
         <form className="space-y-5 bg-white shadow p-10 rounded-lg">
-            {activity.name}
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="category" className="font-bold">Categoría:</label>
                 <select
