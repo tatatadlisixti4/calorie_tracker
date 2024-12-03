@@ -1,9 +1,11 @@
-import {useReducer} from "react";
+import { useReducer } from "react";
 import {Form} from "./components/Form.tsx";
+import ActivityList from "./components/ActivityList.tsx";
 import {activityReducer, initialState} from "./reducers/activity-reducer.ts";
 
+
 function App() {
-    const [state, dispatch] = useReducer(activityReducer, initialState)  // se genera el reducer con la info del custom
+    const [state, dispatch] = useReducer( activityReducer, initialState)   // se genera el reducer con la info del custom
     return (
         <>
             <header className="bg-lime-600 py-3">
@@ -17,6 +19,12 @@ function App() {
                         dispatch={dispatch} // Se pasa via props la funcion a llamar para que se ejecute el reducer
                     />
                 </div>
+            </section>
+
+            <section className="p-10 mx-auto max-w-4xl">
+                <ActivityList
+                    activities={state.activities}
+                />
             </section>
         </>
     )
