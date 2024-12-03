@@ -1,8 +1,13 @@
-import {useState, ChangeEvent, FormEvent} from "react"
+import {useState, ChangeEvent, FormEvent, Dispatch} from "react"
 import {categories} from "../data/categories.ts"
 import {Activity} from "../types";
+import {ActivityActions} from "../reducers/activity-reducer.ts";
 
-export function Form() {
+type FormProps = {
+    dispatch: Dispatch<ActivityActions> // Se tipa la variable que se parará via props a la function Form, la cual es un disptach proveniente de un useReducer
+}
+
+export function Form({dispatch} : FormProps) {
     const [activity, setActivity] = useState<Activity>({
         category: 1,
         name: '',
@@ -24,7 +29,8 @@ export function Form() {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(e)
+        // El dispatch es lo que dispara el reducer. Se le pasa el type que es la accion a ejercer y el payload que es la info se añadirá al state.
+        dispatch({type: "save-activity", payload: {newActivity: activity} })
     }
     return (
         <form
@@ -70,7 +76,7 @@ export function Form() {
                     className="border border-slate-300 p-2 rounded-lg w-full bg-white"
                     placeholder="Ej. 300 o 777"
                     value={activity.calories}
-                    onChange={ handleChange}
+                    onChange={handleChange}
                 />
             </div>
 
