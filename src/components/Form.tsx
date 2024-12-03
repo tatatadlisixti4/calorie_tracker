@@ -1,4 +1,5 @@
 import {useState, ChangeEvent, FormEvent, Dispatch} from "react"
+import {v4 as uuidv4} from 'uuid' // Hay que añadir via npm los types de uuid
 import {categories} from "../data/categories.ts"
 import {Activity} from "../types";
 import {ActivityActions} from "../reducers/activity-reducer.ts";
@@ -7,7 +8,8 @@ type FormProps = {
     dispatch: Dispatch<ActivityActions> // Se tipa la variable que se parará via props a la function Form, la cual es un disptach proveniente de un useReducer
 }
 
-const initialState = {
+const initialState : Activity = {
+    id: uuidv4(),
     category: 1,
     name: '',
     calories: 0
@@ -33,7 +35,8 @@ export function Form({dispatch} : FormProps) {
         e.preventDefault()
         // El dispatch es lo que dispara el reducer. Se le pasa el type que es la accion a ejercer y el payload que es la info se añadirá al state.
         dispatch({type: "save-activity", payload: {newActivity: activity} })
-        setActivity(initialState)
+        // Reestablecer los datos del formulario una vez hecho el submit, tambien se edita el id para que sea otro
+        setActivity({...initialState, id: uuidv4()})
     }
     return (
         <form
