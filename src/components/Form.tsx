@@ -1,6 +1,5 @@
 import {useState, ChangeEvent, FormEvent} from "react"
 import {categories} from "../data/categories.ts"
-
 import {Activity} from "../types";
 
 export function Form() {
