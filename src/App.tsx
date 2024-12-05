@@ -1,11 +1,14 @@
-import {useReducer} from "react";
+import {useReducer, useEffect} from "react";
 import {Form} from "./components/Form.tsx";
 import ActivityList from "./components/ActivityList.tsx";
 import {activityReducer, initialState} from "./reducers/activity-reducer.ts";
 
 function App() {
-    // useReducer Activity
+    // Hooks
     const [state, dispatch] = useReducer( activityReducer, initialState) 
+    useEffect(() => {
+        localStorage.setItem('activities', JSON.stringify(state.activities))
+    }, [state.activities])
     return (
         <>
             {/* Header */}
