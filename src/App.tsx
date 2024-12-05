@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import {useReducer} from "react";
 import {Form} from "./components/Form.tsx";
 import ActivityList from "./components/ActivityList.tsx";
 import {activityReducer, initialState} from "./reducers/activity-reducer.ts";
@@ -24,6 +24,7 @@ function App() {
             <section className="p-10 mx-auto max-w-4xl">
                 <ActivityList
                     activities={state.activities}
+                    dispatch={dispatch}
                 />
             </section>
         </>

@@ -5,7 +5,7 @@ import {Activity} from "../types";
 import {ActivityActions} from "../reducers/activity-reducer.ts";
 
 type FormProps = {
-    dispatch: Dispatch<ActivityActions> // Se tipa la variable que se parará via props a la function Form, la cual es un disptach proveniente de un useReducer
+    dispatch: Dispatch<ActivityActions> // Se tipa la variable que se pasará via props a la function Form, la cual es un disptach proveniente de un useReducer
 }
 
 const initialState : Activity = {
