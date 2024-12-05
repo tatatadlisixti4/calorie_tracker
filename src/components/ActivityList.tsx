@@ -30,7 +30,6 @@ export default function ActivityList({activities, dispatch}: ActivityListProps) 
                             {activity.calories} {''}
                             <span>Calorías</span>
                         </p>
-
                     </div>
 
                     <div className="flex gap-5 items-center">
@@ -40,7 +39,6 @@ export default function ActivityList({activities, dispatch}: ActivityListProps) 
                                 onClick={()=> dispatch({type:"set-activeId", payload: {id: activity.id}})}
                             />
                         </button>
-
                     </div>
                 </div>
             ) )}

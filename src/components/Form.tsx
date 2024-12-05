@@ -1,8 +1,9 @@
 import {useState, ChangeEvent, FormEvent, Dispatch} from "react"
-import {v4 as uuidv4} from 'uuid' // Hay que añadir via npm los types de uuid
 import {categories} from "../data/categories.ts"
 import {Activity} from "../types";
 import {ActivityActions} from "../reducers/activity-reducer.ts";
+
+import {v4 as uuidv4} from 'uuid' // Hay que añadir via npm los types de uuid
 
 type FormProps = {
     dispatch: Dispatch<ActivityActions> // Se tipa la variable que se pasará via props a la function Form, la cual es un disptach proveniente de un useReducer
@@ -16,8 +17,14 @@ const initialState : Activity = {
 }
 
 export function Form({dispatch} : FormProps) {
+    // Hooks
     const [activity, setActivity] = useState<Activity>(initialState)
 
+    // Funciones
+    const isValidActivity = () => {
+        const {name, calories} = activity
+        return name.trim() !== '' && calories > 0
+    }
     const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id)
         setActivity({
@@ -25,19 +32,12 @@ export function Form({dispatch} : FormProps) {
             [e.target.id]: isNumberField ? +e.target.value : e.target.value
         })
     }
-
-    const isValidActivity = () => {
-        const {name, calories} = activity
-        return name.trim() !== '' && calories > 0
-    }
-
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        // El dispatch es lo que dispara el reducer. Se le pasa el type que es la accion a ejercer y el payload que es la info se añadirá al state.
         dispatch({type: "save-activity", payload: {newActivity: activity} }) // No son types, son valores
-        // Reestablecer los datos del formulario una vez hecho el submit, tambien se edita el id para que sea otro
-        setActivity({...initialState, id: uuidv4()})
+        setActivity({...initialState, id: uuidv4()}) // Reestablecer los datos del formulario una vez hecho el submit, tambien se edita el id para que sea otro
     }
+
     return (
         <form
             className="space-y-5 bg-white shadow p-10 rounded-lg"
