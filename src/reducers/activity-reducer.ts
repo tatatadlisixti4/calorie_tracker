@@ -9,7 +9,7 @@ export type ActivityActions = {
         payload: {id: Activity['id']}
     }
 
-type ActivityState = { // Type para el state del activity
+export type ActivityState = { // Type para el state del activity
     activities: Activity[],
     activeId: Activity['id']
 }
@@ -34,6 +34,5 @@ export const activityReducer = ( // El reducer activity
             activeId: action.payload.id 
         }
     }
-
     return state
 }

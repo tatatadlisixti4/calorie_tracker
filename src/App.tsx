@@ -19,6 +19,7 @@ function App() {
             <section className="bg-lime-600 py-20 px-5">
                 <div className="max-w-4xl mx-auto">
                     <Form
+                        state={state}
                         dispatch={dispatch}
                     />
                 </div>

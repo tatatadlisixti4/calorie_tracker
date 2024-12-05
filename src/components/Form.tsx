@@ -1,12 +1,13 @@
-import {useState, ChangeEvent, FormEvent, Dispatch} from "react"
+import {useState, ChangeEvent, FormEvent, Dispatch, useEffect} from "react"
 import {categories} from "../data/categories.ts"
 import {Activity} from "../types";
-import {ActivityActions} from "../reducers/activity-reducer.ts";
+import {ActivityActions, ActivityState} from "../reducers/activity-reducer.ts";
 
 import {v4 as uuidv4} from 'uuid' // Hay que añadir via npm los types de uuid
 
 type FormProps = {
     dispatch: Dispatch<ActivityActions> // Se tipa la variable que se pasará via props a la function Form, la cual es un disptach proveniente de un useReducer
+    state: ActivityState
 }
 
 const initialState : Activity = {
@@ -16,9 +17,15 @@ const initialState : Activity = {
     calories: 0
 }
 
-export function Form({dispatch} : FormProps) {
+export function Form({dispatch, state} : FormProps) {
     // Hooks
     const [activity, setActivity] = useState<Activity>(initialState)
+    useEffect(()=> {
+        if(state.activeId) {
+            const selectedActivity = state.activities.filter(stateActivity => stateActivity.id === state.activeId)[0]
+            setActivity(selectedActivity)
+        }
+    }, [state.activeId])
 
     // Funciones
     const isValidActivity = () => {
