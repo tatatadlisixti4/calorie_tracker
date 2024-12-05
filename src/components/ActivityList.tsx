@@ -3,19 +3,15 @@ import {Activity} from "../types";
 import {categories} from "../data/categories.ts";
 import { PencilSquareIcon } from '@heroicons/react/24/outline'
 
-
 type ActivityListProps = {
     activities: Activity[]
 }
 
-
 export default function ActivityList({activities}: ActivityListProps) {
     const categoryName = useMemo(() =>
-            (category: Activity['category']) => categories[category-1].name
-
-        // categories[+activity.category -1][1]
+        (category: Activity['category']) => categories[category-1].name
     , [activities])
-
+    
     return(
         <>
             <h2 className="text-4xl font-bold text-slate-600 text-center">Comida y Actividades</h2>

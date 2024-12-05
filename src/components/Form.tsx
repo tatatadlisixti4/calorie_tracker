@@ -34,7 +34,7 @@ export function Form({dispatch} : FormProps) {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         // El dispatch es lo que dispara el reducer. Se le pasa el type que es la accion a ejercer y el payload que es la info se añadirá al state.
-        dispatch({type: "save-activity", payload: {newActivity: activity} })
+        dispatch({type: "save-activity", payload: {newActivity: activity} }) // No son types, son valores
         // Reestablecer los datos del formulario una vez hecho el submit, tambien se edita el id para que sea otro
         setActivity({...initialState, id: uuidv4()})
     }
