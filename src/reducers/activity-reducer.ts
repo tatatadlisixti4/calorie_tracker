@@ -24,7 +24,6 @@ const localStorageActivities = () : Activity[] => {
     return activities ? JSON.parse(activities) : []
 }
 
-
 export const initialState: ActivityState = { // Valor inicial del state activity, de tipo activitystate obviamente
     activities: localStorageActivities(),
     activeId: ''
@@ -68,6 +67,5 @@ export const activityReducer = ( // El reducer activity
             activeId: ''
         }
     }
-
     return state
 }
