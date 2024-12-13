@@ -31,17 +31,12 @@ function App() {
                         Reiniciar App
                     </button>
                 </div>
-                
-
             </header> {/* FinHeader */}
 
             {/* Componente Form */}
             <section className="bg-lime-600 py-20 px-5">
                 <div className="max-w-4xl mx-auto">
-                    <Form
-                        state={state}
-                        dispatch={dispatch}
-                    />
+                    <Form />
                 </div>
             </section> {/* Fin Componente Form */}
 
@@ -51,7 +46,6 @@ function App() {
                     />
                 </div>
             </section>
-
 
             {/* Componente ActivityList */}
             <section className="p-10 mx-auto max-w-4xl">
